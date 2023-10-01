@@ -1,45 +1,99 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
-import { persistStore, persistReducer } from 'redux-persist';
+import { configureStore } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import contactReducer from 'redux/contactSlise';
-import filterReducer from 'redux/filterSlice';
+import { tasksReducer } from './tasks/slice';
+import { authReducer } from './auth/slice';
 
-const persistConfig = {
-  key: 'root',
+const authPersistConfig = {
+  key: 'auth',
   storage,
+  whitelist: ['token'],
 };
-
-const persistedReducer = persistReducer(persistConfig, contactReducer);
 
 export const store = configureStore({
   reducer: {
-    contacts: persistedReducer,
-    filter: filterReducer,
+    auth: persistReducer(authPersistConfig, authReducer),
+    tasks: tasksReducer,
   },
-  middleware: getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+  middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+  devTools: process.env.NODE_ENV === 'development',
 });
 
-export const persistor = persistStore(store); 
-
-export default store;
+export const persistor = persistStore(store);
 
 
 
 
 // import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+// import {
+//   persistStore,
+//   persistReducer,
+//   FLUSH,
+//   REHYDRATE,
+//   PAUSE,
+//   PERSIST,
+//   PURGE,
+//   REGISTER,
+// } from 'redux-persist';
+// // import { persistStore, persistReducer } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage';
 // import contactReducer from 'redux/contactSlise';
-// import filterReducer from 'redux/filterSlice'
+// import filterReducer from 'redux/filterSlice';
+// import { authReducer } from './auth/slice'
+
+// const authPersistConfig = {
+//   key: 'root',
+//   storage,
+//   whitelist: ['token'],
+// };
+
+// const persistedReducer = persistReducer( authPersistConfig, contactReducer);
 
 // export const store = configureStore({
 //   reducer: {
-//     contacts: contactReducer,
+//     contacts: persistedReducer(authPersistConfig, authReducer),
 //     filter: filterReducer,
 //   },
 //   middleware: getDefaultMiddleware({
-//     serializableCheck: false,
+//     serializableCheck: {
+//       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//     },
 //   }),
 // });
 
+// export const persistor = persistStore(store); 
+
 // export default store;
+
+
+
+
+// // import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+// // import contactReducer from 'redux/contactSlise';
+// // import filterReducer from 'redux/filterSlice'
+
+// // export const store = configureStore({
+// //   reducer: {
+// //     contacts: contactReducer,
+// //     filter: filterReducer,
+// //   },
+// //   middleware: getDefaultMiddleware({
+// //     serializableCheck: false,
+// //   }),
+// // });
+
+// // export default store;

@@ -1,22 +1,20 @@
-import React from "react";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import { useAuth } from 'hooks/useAuth';
+import css from './Navigation.module.css';
 
 export const Navigation = () => {
-return (
+  const { isLoggedIn } = useAuth();
+
+  return (
     <nav>
-      <ul>
-        <li>
-          <Link to="/register">Street route</Link>
-        </li>
-        <li>
-          <Link to="/login">Street route</Link>
-        </li>
-        <li>
-          <Link to="/contact">Private route</Link>
-        </li>
-      </ul>
+      <NavLink className={css.link} to="/">
+        Home
+      </NavLink>
+      {isLoggedIn && (
+        <NavLink className={css.link} to="/tasks">
+          Tasks
+        </NavLink>
+      )}
     </nav>
   );
 };
-
-export default Navigation;

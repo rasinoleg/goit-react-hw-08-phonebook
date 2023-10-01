@@ -1,17 +1,17 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
-import { SectionContainer, Title } from './Section.module';
+// import { SectionContainer, Title } from './Section.module';
 
-export const Section = ({ title, children }) => {
-  return (
-    <SectionContainer>
-      {title && <Title>{title}</Title>}
-      {children}
-    </SectionContainer>
-  );
-};
+// export const Section = ({ title, children }) => {
+//   return (
+//     <SectionContainer>
+//       {title && <Title>{title}</Title>}
+//       {children}
+//     </SectionContainer>
+//   );
+// };
 
-Section.propTypes = {
-  title: PropTypes.string,
-  children: PropTypes.node,
-};
+// Section.propTypes = {
+//   title: PropTypes.string,
+//   children: PropTypes.node,
+// };
