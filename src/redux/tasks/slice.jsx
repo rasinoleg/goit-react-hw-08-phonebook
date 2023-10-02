@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { logOut } from 'redux/auth/operations';
-import { fetchContacts, addTask, deleteTask } from './operations';
+import { fetchContacts, addContacts, deleteContacts } from './operations';
 
 const initialState = {
   items: [],
@@ -17,21 +17,21 @@ const tasksSlice = createSlice({
       .addCase(fetchContacts.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(addTask.pending, (state) => {
+      .addCase(addContacts.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deleteTask.pending, (state) => {
+      .addCase(deleteContacts.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
       })
-      .addCase(addTask.rejected, (state, action) => {
+      .addCase(addContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
       })
-      .addCase(deleteTask.rejected, (state, action) => {
+      .addCase(deleteContacts.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
       })
@@ -40,12 +40,12 @@ const tasksSlice = createSlice({
         state.error = null;
         state.items = action.payload;
       })
-      .addCase(addTask.fulfilled, (state, action) => {
+      .addCase(addContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.items.push(action.payload);
       })
-      .addCase(deleteTask.fulfilled, (state, action) => {
+      .addCase(deleteContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.items = state.items.filter(
