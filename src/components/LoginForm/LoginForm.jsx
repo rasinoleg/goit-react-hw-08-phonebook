@@ -5,10 +5,10 @@ import css from './LoginForm.module.css';
 export const LoginForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.currentTarget;
-    dispatch(
+    await dispatch(
       logIn({
         email: form.elements.email.value,
         password: form.elements.password.value,
@@ -31,3 +31,5 @@ export const LoginForm = () => {
     </form>
   );
 };
+
+
