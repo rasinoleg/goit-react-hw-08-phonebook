@@ -8,9 +8,9 @@ export const Task = ({ id, text }) => {
 
   return (
     <div className={css.wrapper}>
-      <p className={css.text}>{text}</p>
+      <p className={css.text}>{1}</p>
       <button type="button" className={css.button} onClick={handleDelete}>
-        Delete
+        Delete Contacts
       </button>
     </div>
   );
